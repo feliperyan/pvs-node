@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <% include ../partials/header.ejs %>
 </head>
@@ -9,8 +9,8 @@
     <form action="/file-upload"
           class="dropzone"
           id="metamindUpload">
-          <div class="dz-message"></div>
-    </form>    
+          <div class="dz-message">Drop image here or tap to upload</div>
+    </form>
     <img id="einstein" src="/static/EinsteinAtom.png"/>
     <div class="fileupload-process">
       <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -38,7 +38,7 @@
           this.on("sending", function(file) { 
             this.removeAllFiles();
             document.querySelector("#total-progress").style.opacity = "1";
-            scaleImageDown();
+            $("#metamindUpload").addClass("scale-down")
           });
           this.on("uploadprogress", function(file,progress,bytesSent) { 
             document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
@@ -47,6 +47,14 @@
             document.querySelector("#total-progress").style.opacity = "0"; 
             var jsonobj = JSON.parse(response);
             parseJSON(jsonobj);
+          });
+          this.on("error", function(file, error) { 
+            document.querySelector("#total-progress").style.opacity = "0"; 
+            console.error(error);
+          });
+          this.on("canceled", function(file) { 
+            document.querySelector("#total-progress").style.opacity = "0"; 
+            console.log("Canceled upload");
           });
         }
       }
@@ -65,19 +73,6 @@
           cell1.innerHTML = e.label;
           cell2.innerHTML = e.probability;
         });
-      }
-
-      function startOver(){
-        document.getElementById("metamindUpload").style.display = "block";
-      }
-
-      function scaleImageDown(){
-        const e = document.getElementById("metamindUpload")
-        for(var i = 500;i>100;i--) {
-          e.style.height   = i+"px";
-          e.style.maxWidth = i+"px";
-        }
-        
       }
   </script>
 </body>

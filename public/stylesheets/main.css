@@ -51,20 +51,37 @@
   
 }
 
-
-#metamindUpload{
-    background-position: center;
-    max-width: 500px;
-    height:500px;
-    width:70%;
-    background-size: cover;
-    background: url(/static/metamindIcon.svg) no-repeat;
-    margin: 0px auto;
-    margin-top: 20px;
-    cursor: pointer;
-    -webkit-transition: all 2s ease-in-out; /* Safari */
-    transition:all 2s ease-in-out ;
+.dropzone {
+  position: relative;
+  background-position: center center;
+  max-width: 500px;
+  height:435px;
+  width:70%;
+  background-size: cover;
+  background: url(/static/metamindIcon.svg) no-repeat;
+  margin: 0px auto;
+  margin-top: 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out; /* Safari */
+  transition:all 0.3s ease-in-out ;
 }
+
+.dz-message {
+  position: absolute;
+  width: 100%;
+  bottom: 40px;
+  color: #ccc;
+}
+
+.scale-down {
+  height: 100px;
+  width: 100px;
+}
+
+.scale-down .dz-message {
+  display: none;
+}
+
 
 #metamindUpload:hover {
     transform: scale(.9);
